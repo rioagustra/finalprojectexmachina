@@ -1,0 +1,11 @@
+# Visualisasikan distribusi data
+sns.histplot(df_train['col_name'])
+plt.show()
+
+# Identifikasi pencilan
+sns.boxplot(df_train['col_name'])
+plt.show()
+
+# Jelajahi hubungan antar variabel
+sns.scatterplot(x='col_name1', y='col_name2', data=df_train)
+plt.show()
