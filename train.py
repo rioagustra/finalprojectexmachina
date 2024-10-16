@@ -28,7 +28,7 @@ def main():
     married = st.sidebar.selectbox('Ever_Married', ['Yes', 'No'])
     age = st.sidebar.slider('Age', 18, 100, 30)
     graduated = st.sidebar.selectbox('Graduated', ['Yes', 'No'])
-    work_experience = st.sidebar.number_input('Work_Experience (years)', min_value=0, max_value=50, value=1)
+    work_experience = st.sidebar.number_input('Work_Experience', min_value=0, max_value=50, value=1)
     spending_score = st.sidebar.selectbox('Spending_Score', ['Low', 'Average', 'High'])
     family_size = st.sidebar.number_input('Family_Size', min_value=1, max_value=10, value=3)
     profession = st.sidebar.selectbox('Profession', 
@@ -50,21 +50,14 @@ def predict_segmentation(gender, married, age, graduated, work_experience,
     graduated = 1 if graduated == 'Yes' else 0
     spending_score_map = {'Low': 0, 'Average': 1, 'High': 2}
     spending_score = spending_score_map[spending_score]
-
-    # One-hot encoding for Profession and Var_1
     profession_map = {'Artist': 0, 'Doctor': 1, 'Engineer': 2, 'Entertainment': 3,
                       'Healthcare': 4, 'Homemaker': 5, 'Lawyer': 6, 'Marketing': 7}
     var1_map = {'Cat_1': 0, 'Cat_2': 1, 'Cat_3': 2, 'Cat_4': 3, 
                 'Cat_5': 4, 'Cat_6': 5, 'Cat_7': 6}
 
-    profession_encoded = np.zeros(8)
-    var1_encoded = np.zeros(7)
-    profession_encoded[profession_map[profession]] = 1
-    var1_encoded[var1_map[var1]] = 1
-
     # Create the input vector
     input_data = np.concatenate(([gender, married, age, graduated, work_experience, 
-                                  spending_score, family_size], profession_encoded, var1_encoded))
+                                  spending_score, family_size, profession_map, var1_map]))
 
     # Make Prediction
     prediction = logistic_regression_model.predict([input_data])[0]
