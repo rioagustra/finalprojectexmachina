@@ -63,5 +63,14 @@ def predict_segmentation(gender, married, age, graduated, work_experience,
     segmentation_map = {0: 'A', 1: 'B', 2: 'C', 3: 'D'}
     return segmentation_map[prediction]
 
+    # Print out the feature names expected by the Logistic Regression model
+print(f"Number of expected features: {logistic_regression_model.n_features_in_}")
+print("Expected feature names (if available):")
+try:
+    print(logistic_regression_model.feature_names_in_)
+except AttributeError:
+    print("Feature names not stored in the model. Please ensure feature order matches.")
+
+
 if __name__ == "__main__":
     main()
