@@ -6,6 +6,14 @@ import numpy as np
 with open('Logistic_Regression_Model.pkl', 'rb') as file:
     logistic_regression_model = pickle.load(file)
 
+# Print out the feature names expected by the Logistic Regression model
+print(f"Number of expected features: {logistic_regression_model.n_features_in_}")
+print("Expected feature names (if available):")
+try:
+    print(logistic_regression_model.feature_names_in_)
+except AttributeError:
+    print("Feature names not stored in the model. Please ensure feature order matches.")
+
 # Web App Design
 html_temp = """<div style="background-color:#4CAF50;padding:10px;border-radius:10px">
                 <h1 style="color:white;text-align:center">Customer Segmentation Prediction App</h1>
@@ -62,15 +70,6 @@ def predict_segmentation(gender, married, age, graduated, work_experience,
     prediction = logistic_regression_model.predict([input_data])[0]
     segmentation_map = {0: 'A', 1: 'B', 2: 'C', 3: 'D'}
     return segmentation_map[prediction]
-
-    # Print out the feature names expected by the Logistic Regression model
-print(f"Number of expected features: {logistic_regression_model.n_features_in_}")
-print("Expected feature names (if available):")
-try:
-    print(logistic_regression_model.feature_names_in_)
-except AttributeError:
-    print("Feature names not stored in the model. Please ensure feature order matches.")
-
 
 if __name__ == "__main__":
     main()
