@@ -25,12 +25,12 @@ def main():
 
     # Input Fields
     gender = st.sidebar.selectbox('Gender', ['Male', 'Female'])
-    married = st.sidebar.selectbox('Ever Married', ['Yes', 'No'])
+    married = st.sidebar.selectbox('Ever_Married', ['Yes', 'No'])
     age = st.sidebar.slider('Age', 18, 100, 30)
     graduated = st.sidebar.selectbox('Graduated', ['Yes', 'No'])
-    work_experience = st.sidebar.number_input('Work Experience (years)', min_value=0, max_value=50, value=1)
-    spending_score = st.sidebar.selectbox('Spending Score', ['Low', 'Average', 'High'])
-    family_size = st.sidebar.number_input('Family Size', min_value=1, max_value=10, value=3)
+    work_experience = st.sidebar.number_input('Work_Experience (years)', min_value=0, max_value=50, value=1)
+    spending_score = st.sidebar.selectbox('Spending_Score', ['Low', 'Average', 'High'])
+    family_size = st.sidebar.number_input('Family_Size', min_value=1, max_value=10, value=3)
     profession = st.sidebar.selectbox('Profession', 
                                       ['Artist', 'Doctor', 'Engineer', 'Entertainment', 
                                        'Healthcare', 'Homemaker', 'Lawyer', 'Marketing'])
