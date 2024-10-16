@@ -52,15 +52,19 @@ def predict_segmentation(gender, married, age, graduated, work_experience,
     spending_score = spending_score_map[spending_score]
     profession_map = {'Artist': 0, 'Doctor': 1, 'Engineer': 2, 'Entertainment': 3,
                       'Healthcare': 4, 'Homemaker': 5, 'Lawyer': 6, 'Marketing': 7}
+    profession = profession_map[profession]
     var1_map = {'Cat_1': 0, 'Cat_2': 1, 'Cat_3': 2, 'Cat_4': 3, 
                 'Cat_5': 4, 'Cat_6': 5, 'Cat_7': 6}
+    var1 = var1_map[var1]
 
     # Create the input vector
-    input_data = np.concatenate(([gender, married, age, graduated, work_experience, 
-                                  spending_score, family_size, profession_map, var1_map]))
+    input_data = np.array([
+        gender, married, age, graduated, work_experience, 
+        spending_score, family_size, profession, var1
+    ]).reshape(1, -1)  # Ensure it's a 2D array for the model
 
     # Make Prediction
-    prediction = logistic_regression_model.predict([input_data])[0]
+    prediction = logistic_regression_model.predict(input_data)[0]
     segmentation_map = {0: 'A', 1: 'B', 2: 'C', 3: 'D'}
     return segmentation_map[prediction]
 
